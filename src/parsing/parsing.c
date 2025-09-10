@@ -1,5 +1,6 @@
 //#include "miniRT.h"
 #include "parsing.h"
+#include "utils.h"
 
 // static int parsing_line_return_sign(char *line)
 // {
@@ -41,7 +42,8 @@ int parsing(int ac, char **av)
 	char   *line;
 	
 	if (ac != 2)
-	return (0);
+		//return (err_msg_code("wrong ac nbr", 0));
+		return (0);
 	//precheck file suffix, it has to be .rt
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
@@ -55,6 +57,9 @@ int parsing(int ac, char **av)
 		//indentifila liken
 		if (!identify_line(line))
 			return (-1);
+
+		//parsing the line
+
 		free (line);
 		line = get_next_line(fd);
 	}

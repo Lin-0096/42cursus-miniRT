@@ -5,6 +5,7 @@
 # include "../libft/libft.h"
 #include "MLX42/MLX42.h"
 #include "parsing.h"
+#include "utils.h"
 
 //lib headers
 #include <stdlib.h>
