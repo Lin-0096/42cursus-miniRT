@@ -1,0 +1,37 @@
+just notes
+
+=========================DAY 1(10.9)===================================
+// test we should do in day 1
+
+mlx_t *mlx = mlx_init(800, 600, "My Window", true);
+//open a window with give w, h, and title, ture/false enables or disables a certain feature (like vsync), return a MLX instance
+
+mlx_image_t *img = mlx_new_image(mlx, 800, 600);	  
+//create a image  where I draw px to, returns a pointer to the image object.
+//We dont draw directly to window, but to an image & display it in the window
+
+void mlx_image_to_window(mlx, img, 0, 0);
+// put the image to the window; 0, 0 for top left corner of the window
+
+void mlx_put_pixel(image, x, y, color)	    
+//draw a pixel of color to the imgge, color(RGBA)
+//0xAABBCCAA
+    
+void mlx_loop(mlx)                        	
+//start the rendering loop, keep the wimdow open
+// inside the loop, check event and update the window
+
+void mlx_terminate(mlx)	
+// free all resources
+
+=========================DAY 2(11.9)===================================
+-----floats and double--------------
+                    float	                    double
+Size	            Usually 4 bytes (32-bit)	Usually 8 bytes (64-bit)
+Precision	        ~6–7 decimal digits	        ~15–16 decimal digits
+Range	            ~±3.4 × 10^38	            ~±1.7 × 10^308
+pros and cons       low orecision, low mem com  high precheck_av, high mem demands
+                    OK in miniRT
+
+------valgrind-------------
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx42.supp ./miniRT scenes/box.rt

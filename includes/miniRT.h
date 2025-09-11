@@ -1,10 +1,6 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include "MLX42/MLX42.h"
-# include <math.h>
-# include <stdio.h>
-
 typedef struct s_vec3
 {
 	float	x;
@@ -21,6 +17,16 @@ t_vec3	vec_normalize(t_vec3 v);
 float	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 
+//self_defined header
+# include "../libft/libft.h"
+#include "MLX42/MLX42.h"
+#include "parsing.h"
+#include "utils.h"
 #include "raytrace.h"
+
+//lib headers
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
 
 #endif
