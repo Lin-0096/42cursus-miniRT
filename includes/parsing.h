@@ -27,7 +27,8 @@ typedef struct s_a_light
 typedef struct s_camera
 {
     t_vec3   v_point;
-    float   *fov;
+    t_vec3   v_orien;
+    int   fov;
 }	t_camera;
 
 //======================== maybe also later ============================
@@ -76,13 +77,13 @@ typedef struct s_scene
 {
     t_a_light   *ambient_light;
     t_camera    *cam;
-    //t_light   *light;
+    // t_light   *light;
     t_sphere    *sp;
     int         sp_nbr;
-    //t_pl        *pl;
-    //int       pl_nbr;
-    //t_cl        *cl;
-    //int       cl_nbr;
+    // t_pl        *pl;
+    // int       pl_nbr;
+    // t_cl        *cl;
+    // int       cl_nbr;
 }	t_scene;
 
 //headers
@@ -94,17 +95,21 @@ typedef struct s_scene
 #include <stdio.h>      //printf for testing
 
 //parsing.c
+void    parsing_line(char *line, t_scene *scene);
 t_scene *parsing(int ac, char **av);
 
-// parsing_line_1.c
-void get_a_light(char *line, t_scene *scene);
-void get_camera(char *line, t_scene *scene);
-void get_sphere(char *line, t_scene *scene);
-void get_light(char *line, t_scene *scene);
-void parsing_line(char *line, t_scene *scene);
+// parsing_env.c
+void    get_a_light(char *line, t_scene *scene);
+void    get_camera(char *line, t_scene *scene);
+void    get_light(char *line, t_scene *scene);
 
-//parsing_line_2.c
-void get_plane(char *line, t_scene *scene);
-void get_cylinder(char *line, t_scene *scene);
+//parsing_obj.c
+void    get_sphere(char *line, t_scene *scene);
+void    get_plane(char *line, t_scene *scene);
+void    get_cylinder(char *line, t_scene *scene);
+
+//parsing_utils.c
+void    ft_filling_vec(char **str, t_vec3	*vec);
+float	ft_atoi_float(char *str);
 
 #endif

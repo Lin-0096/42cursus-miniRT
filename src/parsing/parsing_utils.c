@@ -1,4 +1,13 @@
 #include "miniRT.h"
+#include "parsing.h"
+
+
+void ft_filling_vec(char **str, t_vec3	*vec)
+{
+	vec->x = ft_atoi_float(str[0]); 
+	vec->y = ft_atoi_float(str[1]); 
+	vec->z = ft_atoi_float(str[2]); 
+}
 
 static float get_decimal(char   *str, double number)
 {
@@ -45,4 +54,3 @@ float	ft_atoi_float(char *str)
     //float max? is it needed
 	return (number * sign);
 }
-

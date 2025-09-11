@@ -1,0 +1,12 @@
+{
+   MLX42 init/destroy
+   Memcheck:Leak
+   fun:mlx_init
+   fun:mlx_new_window
+   fun:mlx_new_image
+   fun:mlx_image_to_window
+   fun:mlx_delete_image
+   fun:mlx_terminate
+}
+
+

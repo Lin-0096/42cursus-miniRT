@@ -3,7 +3,10 @@
 //test version for compiling
 int main(int ac, char **av)
 {
-	if (!parsing(ac, av))
+	t_scene	*scene;
+	
+	scene = parsing(ac, av);
+	if (!scene)
         return (-1);
 
 	//test mlxlib
