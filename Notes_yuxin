@@ -1,7 +1,6 @@
 just notes
 
-DAY 1(10.9)
-
+=========================DAY 1(10.9)===================================
 // test we should do in day 1
 
 mlx_t *mlx = mlx_init(800, 600, "My Window", true);
@@ -18,7 +17,6 @@ void mlx_put_pixel(image, x, y, color)
 //draw a pixel of color to the imgge, color(RGBA)
 //0xAABBCCAA
     
-
 void mlx_loop(mlx)                        	
 //start the rendering loop, keep the wimdow open
 // inside the loop, check event and update the window
@@ -26,3 +24,11 @@ void mlx_loop(mlx)
 void mlx_terminate(mlx)	
 // free all resources
 
+=========================DAY 2(11.9)===================================
+-----floats and double--------------
+                    float	                    double
+Size	            Usually 4 bytes (32-bit)	Usually 8 bytes (64-bit)
+Precision	        ~6–7 decimal digits	        ~15–16 decimal digits
+Range	            ~±3.4 × 10^38	            ~±1.7 × 10^308
+pros and cons       low orecision, low mem com  high precheck_av, high mem demands
+                    OK in miniRT

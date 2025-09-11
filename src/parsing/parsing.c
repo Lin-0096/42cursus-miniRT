@@ -6,8 +6,9 @@
 //return 0 as error and 1 as valid line
 static int validating_identifier(char *line)
 {
-	if (!line[0])
-		return (0);
+	printf("%s", "debug");
+	if (!*line)
+		return 0;
 	if (ft_isspace(line[0]))
 		return (1);
 	else if (ft_strncmp(line, "A ", 2) == 0)
@@ -63,14 +64,16 @@ t_scene *parsing(int ac, char **av)
 	while (line)
 	{
 		printf("%s", line);	//test printing, remove later
-		//indentifila liken
-		if (!validating_identifier(line))
+		if (validating_identifier(line) == 0)
 		{
 			ft_putstr_fd("invalid line in the file", 1);
 			ft_free_scene(scene);
 			return (NULL);
 		}
-		parsing_line(line, scene);
+		printf("%s", "debug");
+		if (line[0])
+			parsing_line(line, scene);
+		printf("%s", "debug");
 		free (line);
 		line = get_next_line(fd);
 	}

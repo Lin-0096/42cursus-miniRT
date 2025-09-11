@@ -8,23 +8,22 @@ static void ft_free_objects(t_scene *scene)
         free(scene->sp);
         scene->sp = NULL;
     }
-    if (scene->pl)
-    {
-        free(scene->pl);
-        scene->pl = NULL;
-    }
-    if (scene->cl)
-    {
-        free(scene->cl);
-        scene->cl = NULL;
-    }
+    // if (scene->pl)
+    // {
+    //     free(scene->pl);
+    //     scene->pl = NULL;
+    // }
+    // if (scene->cl)
+    // {
+    //     free(scene->cl);
+    //     scene->cl = NULL;
+    // }
 }
 
 void ft_free_scene(t_scene *scene)
 {
     if (!scene)
         return;
-    // Free spheres array if it exists
     if (scene->ambient_light)
         free(scene->ambient_light);
     if (scene->cam)

@@ -12,5 +12,7 @@ int err_msg_code(char *str, int n);
 //free.c
 void    ft_free_scene(t_scene *scene);
 
+// str_utils.c
+float	ft_atoi_float(char *str);
 
 #endif

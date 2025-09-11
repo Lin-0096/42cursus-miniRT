@@ -1,14 +1,7 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-//headers
-#include "get_next_line.h"
-#include "utils.h"
 #include "miniRT.h"
-
-//libs
-#include <fcntl.h>      //open
-#include <stdio.h>      //printf for testing
 
 //struct
 // Ambient lightning:
@@ -18,7 +11,7 @@
 // ∗ R,G,B colors in range [0-255]: 255, 255, 255
 typedef struct s_a_light
 {
-    char   *ratio; //should be float here
+    float   ratio;
     int     r;
     int     g;
     int     b;
@@ -34,7 +27,7 @@ typedef struct s_a_light
 typedef struct s_camera
 {
     t_vec3   v_point;
-    char   *fov;    //should be float here
+    float   *fov;
 }	t_camera;
 
 //======================== maybe also later ============================
@@ -53,7 +46,7 @@ typedef struct s_camera
 // ∗ R,G,B colors in range [0-255]: 10, 0, 255
 typedef struct s_sphere
 {
-    t_vec3   sp_center;
+    t_vec3  sp_center;
     float   dia;
     int     r;
     int     g;
@@ -91,6 +84,14 @@ typedef struct s_scene
     //t_cl        *cl;
     //int       cl_nbr;
 }	t_scene;
+
+//headers
+#include "get_next_line.h"
+#include "utils.h"
+
+//libs
+#include <fcntl.h>      //open
+#include <stdio.h>      //printf for testing
 
 //parsing.c
 t_scene *parsing(int ac, char **av);
