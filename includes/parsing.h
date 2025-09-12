@@ -26,9 +26,9 @@ typedef struct s_a_light
 // ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
 typedef struct s_camera
 {
-    t_vec3   v_point;
-    t_vec3   v_orien;
-    int   fov;
+	t_vec3	v_point;
+	t_vec3	v_orien;
+	float	fov; //lin modify
 }	t_camera;
 
 //======================== maybe also later ============================
@@ -43,22 +43,23 @@ typedef struct s_camera
 // sp 0.0,0.0,20.6 12.6 10,0,255
 // ∗ identifier: sp
 // ∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
-// ∗ the sphere diameter: 12.6
+// ∗ the sphere dmeter: 12.6
 // ∗ R,G,B colors in range [0-255]: 10, 0, 255
 typedef struct s_sphere t_sphere;
 
 typedef struct s_sphere
 {
-    t_vec3      sp_center;
-    float       dia;
-    int         r;
-    int         g;
-    int         b;
+	t_vec3  sp_center;
+	float   dia;
+	float	radius; // lin modify
+	int     r;
+	int     g;
+	int     b;
     t_sphere    *next;
 }	t_sphere;
 
 //======================== WEEK 2 ONLY ============================
-// ◦ Plane: 
+// ◦ Plane:
 // pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
 // ∗ identifier: pl
 // ∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
@@ -93,7 +94,6 @@ typedef struct s_scene
 }	t_scene;
 
 //headers
-#include "get_next_line.h"
 #include "utils.h"
 
 //libs
@@ -102,7 +102,7 @@ typedef struct s_scene
 
 //parsing.c
 void    parsing_line(char *line, t_scene *scene);
-int     parsing(int ac, char **av, t_scene *scene);
+t_scene *parsing(int ac, char **av);
 
 // parsing_env.c
 void    get_a_light(char *line, t_scene *scene);

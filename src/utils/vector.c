@@ -6,7 +6,7 @@ t_vec3	vec_add(t_vec3 a, t_vec3 b)
 
 	result.x = a.x + b.x;
 	result.y = a.y + b.y;
-	result.z = a.z + a.z;
+	result.z = a.z + b.z;
 	return (result);
 }
 
@@ -16,7 +16,7 @@ t_vec3	vec_sub(t_vec3 a, t_vec3 b)
 
 	result.x = a.x - b.x;
 	result.y = a.y - b.y;
-	result.z = a.z - a.z;
+	result.z = a.z - b.z;
 	return (result);
 }
 
@@ -60,7 +60,7 @@ float	vec_dot(t_vec3 a, t_vec3 b)
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-
+//Returns a new vector that is: Perpendicular to both a and b
 t_vec3	vec_cross(t_vec3 a, t_vec3 b)
 {
 	t_vec3	result;

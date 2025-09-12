@@ -7,7 +7,7 @@
 static int validating_identifier(char *line)
 {
 	int len;
-	
+
 	len = ft_strlen(line);
 	if (*line && ft_isspace(*line))
 		return (1);
@@ -47,27 +47,58 @@ void parsing_line(char *line, t_scene *scene)
 		// 	get_cylinder(line, scene);
 }
 
-static int	precheck_av(int ac, char **av, t_scene *scene)
+static bool check_file(char **av, t_scene *scene)
 {
 	char	*ext;
-
-	if (ac != 2)
-		return(err_msg_code("wrong ac nbr", 0));
+	
+	ft_bzero(scene, sizeof(t_scene));
+	
 	ext = ft_strrchr(av[1], '.');
-	if (!ext || ft_strcmp(ext, ".rt") != 0)
-		return (err_msg_code("wrong format", 0));
+    if (!ext || ft_strcmp(ext, ".rt") != 0)
+    {
+        ft_putstr_fd("wrong format\n", 1);
+        return (false);
+    }
 	scene->fd = open(av[1], O_RDONLY);
-	if (scene->fd == -1)
-		return (err_msg_code("open file failed", 0));
-	return (1);
+    if (scene->fd == -1)
+    {
+        ft_putstr_fd("open file failed\n", 1);
+        return (false);
+    }
+	return (true);
+}
+
+static t_scene *precheck_av(int ac, char **av)
+{
+    t_scene *scene;
+
+    if (ac < 2)
+    {
+        ft_putstr_fd("missing file argument\n", 1);
+        return (NULL);
+    }
+    scene = malloc(sizeof(t_scene));
+    if (!scene)
+    {
+        ft_putstr_fd("malloc scene failed\n", 1);
+        return (NULL);
+    }
+    if (!check_file(av, scene))
+    {
+        free(scene);
+        return (NULL);
+    }
+    return (scene);
 }
 
 //return 0 as error and 1 as parsing success
-int parsing(int ac, char **av, t_scene *scene)
+t_scene *parsing(int ac, char **av)
 {
 	char	*line;
-	
-	if (!precheck_av(ac, av, scene))
+	t_scene *scene;
+
+    scene = precheck_av(ac, av);
+	if (!scene)
 		return (0);
 	while (1)
 	{
@@ -81,11 +112,11 @@ int parsing(int ac, char **av, t_scene *scene)
 			free(line);
 			ft_free_scene(scene);
 			close(scene->fd);
-			return (0);
+			return (NULL);
 		}
 		parsing_line(line, scene);
 		free (line);
 	}
 	close(scene->fd);
-	return (1);
+	return (scene);
 }

@@ -35,7 +35,7 @@ void    ft_print_scene(t_scene *scene)
             scene->cam->v_orien.x,
             scene->cam->v_orien.y,
             scene->cam->v_orien.z);
-        printf("  FOV: %d\n", scene->cam->fov);
+        printf("  FOV: %f\n", scene->cam->fov);
     }
     else
         printf("Camera: (null)\n");
@@ -70,19 +70,42 @@ int main(int ac, char **av)
 {
 	t_scene	*scene;
 	
-	//malloc
-	scene = malloc(sizeof(t_scene));
+    //parsing
+    scene = parsing(ac, av);
 	if (!scene)
-		return(err_msg_code("malloc scene failed\n", -1));
-	ft_bzero(scene, sizeof(t_scene));
-	//parsing
-	if (!parsing(ac, av, scene))
 		return(-1); //erro msg sent in parsing
-	// mlx
+	
+    // mlx
 	if (!mlx_window(scene))
 		return(err_msg_code("mlx initiation failed\n", -1));
-	//cleaning up and exit
+	
+        //cleaning up and exit
 	ft_print_scene(scene);
 	ft_free_scene(scene);
-	return (0);
+	
+    return (0);
 }
+
+
+// #define WIDTH 800 //test
+// #define HEIGHT 600 //test
+
+// void	hook(void *param)
+// {
+// 	mlx_t	*mlx = param;
+// 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+// 		mlx_close_window(mlx);
+// }
+
+// int	main(void)
+// {
+// 	mlx_t	*mlx;
+
+// 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+// 	if (!mlx)
+// 		return (EXIT_FAILURE);
+// 	mlx_loop_hook(mlx, &hook, mlx);
+// 	mlx_loop(mlx);
+// 	mlx_terminate(mlx);
+// 	return (EXIT_SUCCESS);
+// }
