@@ -49,6 +49,7 @@ typedef struct s_sphere
 {
 	t_vec3  sp_center;
 	float   dia;
+	float	radius; // lin modify
 	int     r;
 	int     g;
 	int     b;

@@ -9,10 +9,12 @@ typedef struct s_ray
 	t_vec3	direction;;
 }	t_ray;
 
-// typedef struct s_hit_record
-// {
-// 	float	t;
+typedef struct s_hit_record
+{
+	float	t; //t represents how far along the ray we go to reach the hit point.
+	t_vec3	point; //hit point
+	t_vec3	normal; //A normal is a vector that points perpendicular to the surface at a specific point.
 
-// }
+}	t_hit_record;
 
 #endif
