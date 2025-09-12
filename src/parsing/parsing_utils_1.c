@@ -1,6 +1,15 @@
 #include "miniRT.h"
 #include "parsing.h"
 
+int	count_token_nbr(char **tokens)
+{
+	int i;
+
+	i = 0;
+	while (tokens[i])
+		i++;
+	return (i);
+}
 
 void ft_filling_vec(char **str, t_vec3	*vec)
 {

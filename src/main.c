@@ -6,63 +6,82 @@
 //test printing delete alter
 //=======================================================
 
-void    ft_print_scene(t_scene *scene)
+void ft_print_scene(t_scene *scene)
 {
-    t_sphere *cur;
+	t_sphere *cur;
+	int i = 1;
 
-    printf("\n===== TEST PRINTING SCENE =====\n");
+	printf("\n===== TEST PRINTING SCENE =====\n");
 
-    if (scene->ambient_light)
-    {
-        printf("Ambient Light:\n");
-        printf("  ratio: %.2f\n", scene->ambient_light->ratio);
-        printf("  color: R=%d G=%d B=%d\n",
-            scene->ambient_light->r,
-            scene->ambient_light->g,
-            scene->ambient_light->b);
-    }
-    else
-        printf("Ambient Light: (null)\n");
+	// Ambient Light
+	if (scene->ambient_light)
+	{
+		printf("Ambient Light:\n");
+		printf("  ratio: %.2f\n", scene->ambient_light->ratio);
+		if (scene->ambient_light->rgb)
+		{
+			printf("  color: R=%d G=%d B=%d\n",
+				scene->ambient_light->rgb->r,
+				scene->ambient_light->rgb->g,
+				scene->ambient_light->rgb->b);
+		}
+		else
+			printf("  color: (null)\n");
+	}
+	else
+		printf("Ambient Light: (null)\n");
 
-    if (scene->cam)
-    {
-        printf("Camera:\n");
-        printf("  position: x=%.2f y=%.2f z=%.2f\n",
-            scene->cam->v_point.x,
-            scene->cam->v_point.y,
-            scene->cam->v_point.z);
-        printf("  orientation: x=%.2f y=%.2f z=%.2f\n",
-            scene->cam->v_orien.x,
-            scene->cam->v_orien.y,
-            scene->cam->v_orien.z);
-        printf("  FOV: %f\n", scene->cam->fov);
-    }
-    else
-        printf("Camera: (null)\n");
+	// Camera
+	if (scene->cam)
+	{
+		printf("Camera:\n");
+		printf("  position: x=%.2f y=%.2f z=%.2f\n",
+			scene->cam->v_point.x,
+			scene->cam->v_point.y,
+			scene->cam->v_point.z);
+		printf("  orientation: x=%.2f y=%.2f z=%.2f\n",
+			scene->cam->v_orien.x,
+			scene->cam->v_orien.y,
+			scene->cam->v_orien.z);
+		printf("  FOV: %.2f\n", scene->cam->fov);
+	}
+	else
+		printf("Camera: (null)\n");
 
-    cur = scene->sp;
-    if (!cur)
-        printf("Spheres: (none)\n");
-    else
-    {
-        int i = 1;
-        while (cur)
-        {
-            printf("Sphere %d:\n", i++);
-            printf("  center: x=%.2f y=%.2f z=%.2f\n",
-                cur->sp_center.x, cur->sp_center.y, cur->sp_center.z);
-            printf("  diameter: %.2f\n", cur->dia);
-            printf("  color: R=%d G=%d B=%d\n", cur->r, cur->g, cur->b);
-            cur = cur->next;
-        }
-    }
+	// Spheres
+	cur = scene->sp;
+	if (!cur)
+		printf("Spheres: (none)\n");
+	else
+	{
+		printf("Spheres (%d):\n", scene->sp_nbr);
+		while (cur)
+		{
+			printf("  Sphere %d:\n", i++);
+			printf("    center: x=%.2f y=%.2f z=%.2f\n",
+				cur->sp_center.x, cur->sp_center.y, cur->sp_center.z);
+			printf("    diameter: %.2f (radius: %.2f)\n",
+				cur->dia, cur->radius);
+			if (cur->rgb)
+			{
+				printf("    color: R=%d G=%d B=%d\n",
+					cur->rgb->r, cur->rgb->g, cur->rgb->b);
+			}
+			else
+				printf("    color: (null)\n");
+			cur = cur->next;
+		}
+	}
 
-    printf("MLX:\n");
-    printf("  mlx ptr : %p\n", (void *)scene->mlx);
-    printf("  img ptr : %p\n", (void *)scene->img);
+	// MLX info
+	printf("MLX:\n");
+	printf("  mlx ptr : %p\n", (void *)scene->mlx);
+	printf("  img ptr : %p\n", (void *)scene->img);
 
-    printf("===== END OF SCENE PRINT =====\n\n");
+	printf("===== END OF SCENE PRINT =====\n\n");
 }
+
+
 //=======================================================
 
 //test version for compiling

@@ -9,8 +9,9 @@ LIBFT_LIB := $(LIBFT_DIR)/libft.a
 INCLUDES := -I includes -I libft -I MLX42/include
 
 SRCS := $(SRC_DIR)/main.c \
-		$(SRC_DIR)/parsing/parsing.c $(SRC_DIR)/parsing/parsing_utils.c \
+		$(SRC_DIR)/parsing/parsing_rt.c $(SRC_DIR)/parsing/parsing_line.c \
 		$(SRC_DIR)/parsing/parsing_env.c $(SRC_DIR)/parsing/parsing_obj.c \
+		$(SRC_DIR)/parsing/parsing_utils_1.c $(SRC_DIR)/parsing/parsing_utils_2.c \
 		$(SRC_DIR)/render/mlx_window.c \
 		$(SRC_DIR)/utils/err_and_free.c $(SRC_DIR)/utils/vector.c\
 		$(SRC_DIR)/intersection/sphere.c \

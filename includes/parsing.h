@@ -3,6 +3,14 @@
 
 #include "miniRT.h"
 
+
+typedef struct s_color
+{
+    int     r;
+    int     g;
+    int     b;
+}	t_color;
+
 //struct
 // Ambient lightning:
 // A 0.2 255,255,255
@@ -12,9 +20,7 @@
 typedef struct s_a_light
 {
     float   ratio;
-    int     r;
-    int     g;
-    int     b;
+    t_color *rgb;
 }	t_a_light;
 
 // ◦ Camera:
@@ -52,9 +58,7 @@ typedef struct s_sphere
 	t_vec3  sp_center;
 	float   dia;
 	float	radius; // lin modify
-	int     r;
-	int     g;
-	int     b;
+	t_color *rgb;
     t_sphere    *next;
 }	t_sphere;
 
@@ -100,22 +104,29 @@ typedef struct s_scene
 #include <fcntl.h>      //open
 #include <stdio.h>      //printf for testing
 
-//parsing.c
-void    parsing_line(char *line, t_scene *scene);
-t_scene *parsing(int ac, char **av);
+//parsing_rt.c          3/5
+t_scene    *parsing(int ac, char **av);
+
+//parsing_line.c        3/5
+bool validating_parsing_line(char *line, t_scene *scene);
 
 // parsing_env.c
-void    get_a_light(char *line, t_scene *scene);
-void    get_camera(char *line, t_scene *scene);
-void    get_light(char *line, t_scene *scene);
+bool    validate_parsing_tokens_a(char **tokens, t_scene *scene);
+bool    validate_parsing_tokens_c(char **tokens, t_scene *scene);
+bool    validate_parsing_tokens_l(char **tokens, t_scene *scene);
 
-//parsing_obj.c
-void    get_sphere(char *line, t_scene *scene);
-void    get_plane(char *line, t_scene *scene);
-void    get_cylinder(char *line, t_scene *scene);
+//parsing_obj.c     3/5
+bool    validate_parsing_tokens_sp(char **tokens, t_scene *scene);
+bool    validate_parsing_tokens_pl(char **tokens, t_scene *scene);
+bool    validate_parsing_tokens_cy(char **tokens, t_scene *scene);
 
-//parsing_utils.c
+//parsing_utils_1.c   4/5
 void    ft_filling_vec(char **str, t_vec3	*vec);
 float	ft_atoi_float(char *str);
+int	count_token_nbr(char **tokens);
+
+//parsing_utils_2.c   3/5
+bool check_rgb(char **colors);
+void do_color(char **colors, t_color *rgb);
 
 #endif
