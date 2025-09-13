@@ -45,7 +45,7 @@ static t_scene *precheck_av(int ac, char **av)
     return (scene);
 }
 
-//return 0 as error and 1 as parsing success
+//return 0 as error and 1 as parsing success // execute order 66
 t_scene *parsing(int ac, char **av)
 {
 	char	*raw_line;
