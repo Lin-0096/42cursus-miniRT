@@ -1,6 +1,7 @@
 #include "miniRT.h"
 #include "parsing.h"
 
+// a valid color string shoud be a pure digit from 0 - 255
 static bool	check_valid_color(char *color)
 {
 	int	i;
@@ -17,6 +18,8 @@ static bool	check_valid_color(char *color)
 	return (true);
 }
 
+// a valid colors strs should be 3 strings
+// each string needs to be a valid color (0 - 255)
 bool	do_color(char **colors, t_color *rgb)
 {
 	int	i;
@@ -38,17 +41,34 @@ bool	do_color(char **colors, t_color *rgb)
 	return (true);
 }
 
+// a valid float str must has a digit before .
+//must has one and only one dote
+//after the dote, the has to be at list one digit
 bool	check_valid_float(char *vec)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (vec[i])
-	{
-		if (!ft_isdigit(vec[i]) && vec[i] != '.' && vec[i] != '-')
-			return (false);
+	if (!vec[0])
+		return (false);
+	if (vec[i] == '-')
 		i++;
+	if (!ft_isdigit(vec[i]))
+		return (false);
+	while (vec[i])
+		i++;
+	if (vec[i] == '.')
+	{
+		i++;
+		if (!vec[i])
+			return (false);
+		if (!ft_isdigit(vec[i]))
+			return (false);
+		while (ft_isdigit(vec[i]))
+			i++;
 	}
+	if (vec[i] != '\0')
+		return (false);
 	return (true);
 }
 
@@ -78,6 +98,8 @@ bool	do_xyz_vectoy(char **vec, t_vec3 *vec_xyz)
 	return (true);
 }
 
+// 3d normalized orientation vector. 
+// In range [-1,1] for each x,y,z axis
 bool	do_normalized_vectoy(char **vec, t_vec3 *vec_nor)
 {
 	int	i;

@@ -45,7 +45,6 @@ static bool	validating_line_id_and_nbr(char **tokens)
 	return (false);
 }
 
-
 bool	validating_parsing_line(char *line, t_scene *scene)
 {
 	char	**tokens;

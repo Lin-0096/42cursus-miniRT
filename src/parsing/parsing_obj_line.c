@@ -1,6 +1,7 @@
 #include "miniRT.h"
 #include "parsing.h"
 
+//helpers for validate_parsing_tokens_pl below
 static bool	fill_pl_tria_data(char **tokens, t_plane *new_pl)
 {
 	char	**vec_1;
@@ -22,6 +23,13 @@ static bool	fill_pl_tria_data(char **tokens, t_plane *new_pl)
 	return (true);
 }
 
+// Plane:
+// pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
+// ∗ identifier: pl
+// ∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
+// ∗ 3d normalized normal vector. 
+// In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
+// ∗ R,G,B colors in range [0-255]: 0,0,225
 bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 {
 	t_plane	*new_pl;
@@ -46,6 +54,7 @@ bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 	return (true);
 }
 
+//helpers for fill_cy_float below
 static bool	fill_cy_tria_data(char **tokens, t_cylinder	*new_cy)
 {
 	char	**vec_1;
@@ -67,6 +76,9 @@ static bool	fill_cy_tria_data(char **tokens, t_cylinder	*new_cy)
 	return (true);
 }
 
+//helpers for fill_cy_float below
+// ∗ the cylinder diameter: can not be minus or too big
+// ∗ the cylinder height: can not be minus or too big
 static bool	fill_cy_float(char **tokens, t_cylinder	*new_cy)
 {
 	if (check_valid_float(tokens[3]) && check_valid_float(tokens[4]))
@@ -76,10 +88,23 @@ static bool	fill_cy_float(char **tokens, t_cylinder	*new_cy)
 	}
 	else
 		return (false);
+	if (new_cy->dia < 0 || new_cy->dia > 1000)
+		return (false);
+	if (new_cy->height < 0 || new_cy->height > 1000)
+		return (false);
 	new_cy->radius = new_cy->dia / 2;
 	return (true);
 }
 
+// Cylinder:
+// cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
+// ∗ identifier: cy
+// ∗ x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
+// ∗ 3d normalized vector of axis of cylinder. 
+// In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
+// ∗ the cylinder diameter: 14.2
+// ∗ the cylinder height: 21.42
+// ∗ R,G,B colors in range [0,255]: 10, 0, 255
 bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 {
 	t_cylinder	*new_cy;
