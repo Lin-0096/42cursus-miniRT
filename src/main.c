@@ -127,15 +127,15 @@ int main(int ac, char **av)
     scene = parsing(ac, av);
 	if (!scene)
 		return(-1); //erro msg sent in parsing
-	
     // mlx
 	if (!mlx_window(scene))
-		return(err_msg_code("mlx initiation failed\n", -1));
-	
-        //cleaning up and exit
-	ft_print_scene(scene);
+	{
+		ft_putstr_fd("mlx initiation failed\n", 1);
+		return (-1);
+	}
+    //cleaning up and exit
+	ft_print_scene(scene); //testing. remove later
 	ft_free_scene(scene);
-	
     return (0);
 }
 

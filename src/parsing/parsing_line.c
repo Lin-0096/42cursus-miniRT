@@ -42,12 +42,13 @@ static bool	validate_tokens_nbr(char **tokens)
 	return (false);
 }
 
+//the line could be empty line
 static bool	validating_line_id(char *line)
 {
 	int	len;
 
 	len = ft_strlen(line);
-	if (*line && ft_isspace(*line)) //the line could be empty line
+	if (*line && ft_isspace(*line))
 		return (true);
 	if (len >= 2 && ft_strncmp(line, "A ", 2) == 0)
 		return (true);

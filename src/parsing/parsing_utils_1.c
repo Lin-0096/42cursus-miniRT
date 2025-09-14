@@ -21,12 +21,13 @@ int	count_token_nbr(char **tokens)
 	return (i);
 }
 
+//skip '.' first
 static float	get_decimal(char *str, double number)
 {
 	float	decimal;
 	float	fraction;
 
-	str++;  //skip '.'
+	str++;
 	decimal = 1.0;
 	fraction = 0.0;
 	while (*str && ft_isdigit(*str))

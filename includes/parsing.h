@@ -130,25 +130,25 @@ typedef struct s_scene
 	mlx_image_t	*img;
 }	t_scene;
 
-//parsing_rt.c          3/5
+//parsing_rt.c          4/5
 t_scene	*parsing(int ac, char **av);
 
 //parsing_line.c        4/5
 bool	validating_parsing_line(char *line, t_scene *scene);
 
-// parsing_env.c     3/5
-// parsing lights and camera:
+// parsing_env.c     5/5
+// parsing a_light, camera, light and sphere:
 bool	validate_parsing_tokens_a(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_c(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_l(char **tokens, t_scene *scene);
-
-//parsing_obj.c     3/5
-// parsing objects: sphere, plane and cylinder
 bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene);
+
+//parsing_obj.c     5/5
+// parsing objects: plane and cylinder
 bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene);
 
-//parsing_utils_1.c   3/5
+//parsing_utils_1.c   4/5
 float	ft_atoi_float(char *str);
 int		count_token_nbr(char **tokens);
 void	free_three_arr(char **vec_1, char **vec_2, char **colors);

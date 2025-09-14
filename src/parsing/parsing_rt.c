@@ -47,6 +47,16 @@ static t_scene	*precheck_av(int ac, char **av)
 	return (scene);
 }
 
+static t_scene	*dealing_line_err(char *line, t_scene *scene)
+{
+	ft_putstr_fd("Invalid line in the file: ", 1);
+	ft_putstr_fd(line, 1);
+	ft_putchar_fd('\n', 1);
+	free(line);
+	ft_free_scene(scene);
+	return (NULL);
+}
+
 //call check av firsr, then get each line and check and parse eachline'
 // return the parsed scene to the main
 // if error occured during one line. free evertyihg so far and return null
@@ -64,23 +74,15 @@ t_scene	*parsing(int ac, char **av)
 		raw_line = get_next_line(scene->fd);
 		if (!raw_line)
 			break ;
-		line = ft_strtrim(raw_line, "\n"); //null check
+		line = ft_strtrim(raw_line, "\t\r\n");
 		free (raw_line);
 		if (!line)
 		{
 			ft_free_scene(scene);
-			close(scene->fd);
 			return (NULL);
 		}
 		if (line[0] && !validating_parsing_line(line, scene))
-		{
-			ft_putstr_fd("invalid line in the file", 1);
-			printf("%s\n", line);
-			free(line);
-			ft_free_scene(scene);
-			close(scene->fd);
-			return (NULL);
-		}
+			return (dealing_line_err(line, scene));
 		free (line);
 	}
 	close(scene->fd);
