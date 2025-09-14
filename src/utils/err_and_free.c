@@ -21,7 +21,7 @@ static void	ft_free_linked_objects(t_scene *scene)
 	while (scene->pl)
 	{
 		pl_tmp = scene->pl->next;
-		free(scene->sp);
+		free(scene->pl);
 		scene->pl = pl_tmp;
 	}
 	scene->pl = NULL;
@@ -36,8 +36,10 @@ static void	ft_free_linked_objects(t_scene *scene)
 
 void	ft_free_scene(t_scene *scene)
 {
+	if (!scene)
+		return ;
 	ft_free_linked_objects(scene);
-	if (scene->fd > -1)
+	if (scene->fd >= 0)
 		close(scene->fd);
 	if (scene->img && scene->mlx)
 		mlx_delete_image(scene->mlx, scene->img);

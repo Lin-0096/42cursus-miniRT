@@ -38,3 +38,37 @@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressi
 
 lots of mem loss here:
  valgrind  --leak-check=full  --suppressions=mlx42.supp ./miniRT scenes/box.rt
+
+
+ what is the pro and con of this Using a generic t_object list. can you explain in chinese
+在 miniRT 项目中，如果使用通用的 t_object 链表（所有物体放入一个链表，而不是分别用 sp[], pl[], cl[]），会带来一些优点和缺点。
+
+优点：
+
+结构统一：所有物体结构统一管理，不再需要分别处理 sphere、plane、cylinder 等。遍历时也只需要一个循环。
+
+易于扩展：添加新物体类型（如 cone、disk）时，只需添加新类型和对应处理函数，不需要修改 scene 结构。
+
+代码简洁：减少变量数量（如 sp_nbr、pl_nbr），内存管理集中，调试更方便。
+
+贴近专业引擎设计：现代渲染器通常采用统一对象系统，方便实现多态（用函数指针模拟）。
+
+缺点：
+
+类型转换麻烦：每种物体结构不同，访问时需强制类型转换 ((t_sphere *)obj->data)，容易出错。
+
+丧失类型安全：因为使用 void * 存储具体对象，编译器无法检查类型，错误只在运行时暴露。
+
+性能略低：链表遍历比数组慢，内存也不连续，可能影响缓存性能（cache miss）。
+
+内存管理更复杂：每个对象需单独 malloc，释放时要逐个节点释放，而数组只需一次 free。
+
+总结对比：
+
+特点	分类型数组 (sp[], pl[]...)	通用 t_object 链表
+结构统一性	❌	✅
+扩展性（新物体类型）	❌	✅
+类型安全	✅	❌
+性能	✅	❌
+内存释放复杂度	✅	❌
+学习难度	✅ 易理解	⚠️ 略复杂但更高级

@@ -29,12 +29,11 @@ typedef struct s_a_light
 }			t_a_light;
 
 // ◦ Camera:
-// C -50.0,0,20 0,0,1 70
+
 // ∗ identifier: C
 // ∗ x,y,z coordinates of the view point: -50.0,0,20
 // ∗ 3d normalized orientation vector.
-// In range [-1,1] for each x,y,z axis:
-// 0.0,0.0,1.0
+// In range [-1,1] for each x,y,z axis: 0.0,0.0,1.0
 // ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
 typedef struct s_camera
 {
@@ -44,7 +43,6 @@ typedef struct s_camera
 }	t_camera;
 
 // ◦ Light:
-// L -40.0,50.0,0.0 0.6 10,0,255
 // ∗ identifier: L
 // ∗ x,y,z coordinates of the light point: -40.0,50.0,0.0
 // ∗ the light brightness ratio in range [0.0,1.0]: 0.6
@@ -121,10 +119,10 @@ typedef struct s_scene
 	t_camera	cam;
 	t_light		light;
 	t_sphere	*sp;
-	int			sp_nbr;
 	t_plane		*pl;
-	int			pl_nbr;
 	t_cylinder	*cl;
+	int			sp_nbr;
+	int			pl_nbr;
 	int			cl_nbr;
 	mlx_t		*mlx;
 	mlx_image_t	*img;

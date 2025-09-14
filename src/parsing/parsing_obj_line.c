@@ -16,7 +16,6 @@ static bool	fill_pl_tria_data(char **tokens, t_plane *new_pl)
 		|| !do_color(colors, &(new_pl->rgb)))
 	{
 		free_three_arr(vec_1, vec_2, colors);
-		free(new_pl);
 		return (false);
 	}
 	free_three_arr(vec_1, vec_2, colors);
@@ -40,7 +39,10 @@ bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 		return (false);
 	ft_bzero(new_pl, sizeof(t_plane));
 	if (!fill_pl_tria_data(tokens, new_pl))
+	{
+		free (new_pl);
 		return (false);
+	}
 	new_pl->next = NULL;
 	if (!scene->pl)
 		scene->pl = new_pl;
@@ -69,7 +71,6 @@ static bool	fill_cy_tria_data(char **tokens, t_cylinder	*new_cy)
 		|| !do_color(colors, &(new_cy->rgb)))
 	{
 		free_three_arr(vec_1, vec_2, colors);
-		free(new_cy);
 		return (false);
 	}
 	free_three_arr(vec_1, vec_2, colors);
@@ -115,9 +116,15 @@ bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 		return (false);
 	ft_bzero(new_cy, sizeof(t_cylinder));
 	if (!fill_cy_float(tokens, new_cy))
+	{
+		free (new_cy);
 		return (false);
+	}
 	if (!fill_cy_tria_data(tokens, new_cy))
+	{
+		free (new_cy);
 		return (false);
+	}
 	new_cy->next = NULL;
 	if (!scene->cl)
 		scene->cl = new_cy;

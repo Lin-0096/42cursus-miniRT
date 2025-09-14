@@ -9,10 +9,8 @@ typedef struct s_scene t_scene;
 #include "miniRT.h"
 #include "parsing.h"
 
-// //keyboard.c
-// void    ft_free_scene(t_scene *scene);
-
 //mlx_window.c
+void render_scene(t_scene *scene);
 bool	mlx_window(t_scene *scene);
 
 #endif

@@ -96,7 +96,6 @@ static bool	fill_sp_bio_data(char **tokens, t_sphere	*new_sp)
 		|| !do_xyz_vectoy(vec_1, &new_sp->sp_center))
 	{
 		free_three_arr(vec_1, NULL, colors);
-		free(new_sp);
 		return (false);
 	}
 	free_three_arr(vec_1, NULL, colors);
@@ -122,11 +121,20 @@ bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 	if (check_valid_float(tokens[2]))
 		new_sp->dia = ft_atoi_float(tokens[2]);
 	else
+	{
+		free (new_sp);
 		return (false);
-	if (new_sp->dia < 0 new_sp->dia > 1000)
+	}
+	if (new_sp->dia < 0 || new_sp->dia > 1000)
+	{
+		free (new_sp);
 		return (false);
+	}
 	if (!fill_sp_bio_data(tokens, new_sp))
+	{
+		free (new_sp);
 		return (false);
+	}
 	new_sp->next = NULL;
 	if (!scene->sp)
 		scene->sp = new_sp;
