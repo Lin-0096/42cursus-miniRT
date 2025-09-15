@@ -60,7 +60,17 @@ void	init_viewport(t_camera *cam, t_camera_view *view)
 	view->viewport_origin = vec_add(center, vec_scale(view->up, view->viewport_height / 2));
 	view->viewport_origin = vec_add(view->viewport_origin, vec_scale(view->right, view->viewport_width / 2));
 }
-//u,v: Pixel index → percentage across the screen
+/*
+Each pixel corresponds to a point on the viewport.
+u,v: Pixel index → percentage across the screen
+because we can't shoot rays just using (x, y) — because that's only 2D
+For each pixel (x, y):
+Creates a ray from the camera, through the corresponding point on the viewport
+Sends the ray into the 3D scene
+Sees what it hits
+Calculates the color (based on lighting, materials, etc.)
+Writes the color to the pixel
+*/
 t_ray	generate_primary_ray(int x, int y, t_camera_view *view)
 {
 	float	u;
