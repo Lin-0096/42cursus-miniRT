@@ -9,4 +9,31 @@
    fun:mlx_terminate
 }
 
+{
+   Mesa / Gallium GPU driver
+   Memcheck:Leak
+   fun:amdgpu_winsys_create
+   fun:driCreateNewScreen3
+   fun:libgallium*
+   fun:libGLX_mesa*
+   fun:calloc
+   fun:malloc
+}
 
+{
+   libgallium
+   Memcheck:Leak
+   fun:*libgallium*
+}
+
+{
+   mesa driver leaks
+   Memcheck:Leak
+   fun:*amdgpu*
+}
+
+{
+   glx leaks
+   Memcheck:Leak
+   fun:*libGLX*
+}
