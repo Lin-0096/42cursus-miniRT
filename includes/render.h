@@ -10,7 +10,7 @@ typedef struct s_scene t_scene;
 #include "parsing.h"
 
 //mlx_window.c
-void render_scene(t_scene *scene);
+void	render_scene(t_scene *scene);
 bool	mlx_window(t_scene *scene);
 
 #endif
