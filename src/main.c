@@ -25,6 +25,7 @@ void	setup_scene(t_scene *scene)
 	s->rgb = (t_color){255, 0, 0};
 	add_object(&scene->objects, OBJ_SP, s);
 }
+
 int	main(void)
 {
 	t_scene			scene;
@@ -145,8 +146,8 @@ int	main(void)
 // 	printf("===== END OF SCENE PRINT =====\n\n");
 // }
 // //=======================================================
+// //test version for compiling
 
-// // //test version for compiling
 // int main(int ac, char **av)
 // {
 // 	t_scene	*scene;
