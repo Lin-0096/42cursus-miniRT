@@ -20,6 +20,10 @@ t_vec3	vec_normalize(t_vec3 v);
 float	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 
+typedef struct s_scene t_scene;
+
+// void	ft_print_scene(t_scene *scene);
+
 //self_defined header
 # include "../libft/libft.h"
 #include "MLX42/MLX42.h"

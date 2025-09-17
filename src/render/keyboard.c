@@ -10,12 +10,36 @@ void	close_window(void *param)
 	ft_free_scene(scene);
 }
 
-// close window from keyboard
-void	key_hook(mlx_key_data_t keydata, void *param)
+void    key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_scene	*scene;
+	t_scene *scene;
+    t_vec3  move;
+    float   move_unit;
 
-	scene = (t_scene *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+    move = (t_vec3){0,0,0};
+	move_unit = 5.0;
+    scene = (t_scene *)param;
+    if (keydata.action != MLX_PRESS)
+    {
+        return ;    
+    }
+	if (keydata.key == MLX_KEY_ESCAPE)
 		close_window(scene);
+    if (keydata.key == MLX_KEY_W)
+		move = (t_vec3){0, +move_unit, 0};
+    if (keydata.key == MLX_KEY_S)
+		move = (t_vec3){0, -move_unit, 0};
+    if (keydata.key == MLX_KEY_A)
+		move = (t_vec3){move_unit, 0, 0};
+    if (keydata.key == MLX_KEY_D)
+		move = (t_vec3){-move_unit, 0, 0};
+    // if (keydata.key == MLX_KEY_LEFT)
+	// 	close_window(scene);
+    // if (keydata.key == MLX_KEY_RIGHT)
+	// 	close_window(scene);
+    if (vec_len(move) > 0)
+    {
+        scene->need_loop = 1;
+        change_scene(scene, move);
+    }
 }

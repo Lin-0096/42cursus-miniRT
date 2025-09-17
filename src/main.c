@@ -3,7 +3,7 @@
 #include    "render.h"
 
 
-//==========================lin test===========================
+// ==========================lin test===========================
 // void	add_object(t_object **list, t_obj_type type, void *data)
 // {
 // 	t_object	*new;
@@ -49,7 +49,6 @@
 
 // test printing delete alter
 // =======================================================
-
 // void	ft_print_scene(t_scene *scene)
 // {
 // 	t_object	*tmp;
@@ -140,7 +139,7 @@
 
 // 	printf("===== END OF SCENE PRINT =====\n\n");
 // }
-//=======================================================
+// =======================================================
 
 // //test version for compiling
 int main(int ac, char **av)
