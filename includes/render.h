@@ -3,6 +3,14 @@
 
 typedef struct s_scene t_scene;
 
+typedef struct s_render_data
+{
+	t_ray			ray;
+	t_camera_view	view;
+	t_hit_record	rec;
+	t_color			c;
+}	t_render_data;
+
 //self_defined header
 # include "../libft/libft.h"
 #include "MLX42/MLX42.h"
@@ -17,7 +25,9 @@ bool	mlx_window(t_scene *scene);
 void	close_window(void *param);
 void	key_hook(mlx_key_data_t keydata, void *param);
 
+
 //move_and_rotate.c
 void change_scene(t_scene *scene, t_vec3 move);
 
 #endif
+

@@ -1,6 +1,6 @@
-#include    "miniRT.h"
-#include    "render.h"
-#include    "parsing.h"
+#include	"miniRT.h"
+#include	"render.h"
+#include	"parsing.h"
 
 //lin needs to uses this ??
 // this is probably where our work overlapping each other
@@ -11,23 +11,20 @@ void	render_scene(t_scene *scene)
 {
 	int				x;
 	int				y;
-	t_ray			ray;
-	t_camera_view	view;
-	t_hit_record	rec;
-	t_color			c;
+	t_render_data	data;
 
-	init_viewport(&scene->cam, &view);
+	init_viewport(&scene->cam, &data.view);
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			ray = generate_primary_ray(x, y, &view);
-			if (hit_objects(ray, scene->objects, &rec))
+			data.ray = generate_primary_ray(x, y, &data.view);
+			if (hit_objects(data.ray, scene->objects, &data.rec))
 			{
-				c = rec.rgb;
-				mlx_put_pixel(scene->img, x, y, (c.r << 24 | c.g << 16 | c.b << 8 | 255));
+				data.c = final_color(data.rec.rgb, scene->ambient_light, scene->light, data.rec);
+				mlx_put_pixel(scene->img, x, y, (data.c.r << 24 | data.c.g << 16 | data.c.b << 8 | 255));
 			}
 			else
 				mlx_put_pixel(scene->img, x, y, 0x000000FF);
@@ -36,6 +33,7 @@ void	render_scene(t_scene *scene)
 		y++;
 	}
 }
+
 
 static void render_scene_loop(void *param)
 {
@@ -46,7 +44,6 @@ static void render_scene_loop(void *param)
 		scene->need_loop = false;
 	}
 }
-
 
 //remove to render later
 //mlx_init: 4th: full scree> true or false
@@ -73,7 +70,6 @@ bool	mlx_window(t_scene *scene)
 	//render_scene(scene);yuxin chcnange it to loop
 	//scene->need_loop = true;
 	mlx_loop_hook(scene->mlx, render_scene_loop, scene);
-	
 	mlx_loop(scene->mlx);
 	return (true);
 }

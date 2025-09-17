@@ -2,51 +2,6 @@
 #include "parsing.h"
 #include    "render.h"
 
-
-// ==========================lin test===========================
-// void	add_object(t_object **list, t_obj_type type, void *data)
-// {
-// 	t_object	*new;
-
-// 	new = malloc(sizeof(t_object));
-// 	if (!new)
-// 		return ;
-// 	new->type = type;
-// 	new->data = data;
-// 	new->next = *list;
-// 	*list = new;
-// }
-
-// void	setup_scene(t_scene *scene)
-// {
-// 	t_sphere *s = malloc(sizeof(t_sphere));
-// 	s->sp_center = vec3(0, 0, -5);
-// 	s->radius = 1.0f;
-// 	s->rgb = (t_color){255, 100, 20};
-// 	add_object(&scene->objects, OBJ_SP, s);
-// }
-// int	main(void)
-// {
-// 	//mlx_t			*mlx;
-// 	t_scene			scene;
-
-// 	scene.mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
-// 	scene.img = mlx_new_image(scene.mlx, WIDTH, HEIGHT);
-// 	scene.objects = NULL;
-
-// 	scene.cam.v_point = vec3(0, 0, 0);
-// 	scene.cam.v_orien = vec3(0, 0, -1);
-// 	scene.cam.fov = 70;
-// 	setup_scene(&scene);
-
-// 	render_scene(&scene);
-
-// 	mlx_image_to_window(scene.mlx, scene.img, 0, 0);
-// 	mlx_loop(scene.mlx);
-// 	mlx_terminate(scene.mlx);
-// 	return (0);
-// }
-
 // test printing delete alter
 // =======================================================
 // void	ft_print_scene(t_scene *scene)
