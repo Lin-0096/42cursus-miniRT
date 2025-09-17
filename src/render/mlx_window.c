@@ -37,24 +37,6 @@ void	render_scene(t_scene *scene)
 	}
 }
 
-static void	close_window(void *param)
-{
-	t_scene	*scene;
-
-	scene = (t_scene *)param;
-	ft_free_scene(scene);
-}
-
-// close window from keyboard
-static void	key_hook(mlx_key_data_t keydata, void *param)
-{
-	t_scene	*scene;
-
-	scene = (t_scene *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		close_window(scene);
-}
-
 //remove to render later
 //mlx_init: 4th: full scree> true or false
 bool	mlx_window(t_scene *scene)

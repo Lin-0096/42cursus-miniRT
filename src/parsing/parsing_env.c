@@ -81,5 +81,8 @@ bool	validate_parsing_tokens_l(char **tokens, t_scene *scene)
 		return (false);
 	}
 	ft_free_arr(vec);
+	scene->light.rgb.r = 255;
+	scene->light.rgb.g = 255;
+	scene->light.rgb.b = 255;
 	return (true);
 }
