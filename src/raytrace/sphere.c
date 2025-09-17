@@ -86,8 +86,15 @@ bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec)
 	if (don == 0) // if (fabs(den) < 1e - 6), 1e-6 =（0.000001）
 		return (false);
 	rec->rgb = plane->rgb;
-	rec->normal = ray.direction;
-	rec->t =  vec_dot(vec_sub(plane->p_in_pl, ray.origin), plane->nor_v) / don; // how fa
+	rec->t = vec_dot(vec_sub(plane->p_in_pl, ray.origin), plane->nor_v) / don; // how fa
+	if (rec->t < 0)
+		return (false);
 	rec->point = vec_add(ray.origin, vec_scale(ray.direction, rec->t));
+	if (vec_dot(ray.direction, plane->nor_v) < 0)
+        rec->normal = plane->nor_v;
+    else
+	{
+		rec->normal = vec_scale(plane->nor_v, -1);
+	}
 	return (true);
 }

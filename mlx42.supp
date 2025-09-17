@@ -1,39 +1,62 @@
 {
-   MLX42 init/destroy
+   MLX42 malloc / init
    Memcheck:Leak
-   fun:mlx_init
-   fun:mlx_new_window
+   fun:malloc
+   fun:__libc_malloc
+   fun:mlx_init*
+}
+
+{
+   MLX42 image allocation
+   Memcheck:Leak
    fun:mlx_new_image
-   fun:mlx_image_to_window
-   fun:mlx_delete_image
+}
+
+{
+   MLX42 terminate
+   Memcheck:Leak
    fun:mlx_terminate
 }
 
 {
-   Mesa / Gallium GPU driver
+   MLX42 delete image
    Memcheck:Leak
-   fun:amdgpu_winsys_create
-   fun:driCreateNewScreen3
-   fun:libgallium*
-   fun:libGLX_mesa*
-   fun:calloc
-   fun:malloc
+   fun:mlx_delete_image
 }
 
 {
-   libgallium
+   X11 internal allocation
    Memcheck:Leak
-   fun:*libgallium*
+   fun:XOpenDisplay
+   fun:XCloseDisplay
+   fun:XGetWindowAttributes
+   fun:XCreateWindow
+   fun:XMapWindow
 }
 
 {
-   mesa driver leaks
+   X11 internal allocation 2
    Memcheck:Leak
-   fun:*amdgpu*
+   fun:XInternAtom
+   fun:XSetWMProtocols
+   fun:XSetWMHints
 }
 
 {
-   glx leaks
+   LLVM internal allocation
    Memcheck:Leak
-   fun:*libGLX*
+   fun:llvm::*
 }
+
+{
+   RadeonSI / driver allocation
+   Memcheck:Leak
+   obj:/usr/lib/x86_64-linux-gnu/dri/radeonsi_dri.so
+}
+
+{
+   Other driver allocations
+   Memcheck:Leak
+   obj:/usr/lib/x86_64-linux-gnu/dri/*.so
+}
+

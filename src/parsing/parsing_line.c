@@ -7,6 +7,16 @@ void	ft_free_scene(t_scene *scene)
 
 	if (!scene)
 		return ;
+	if (scene->fd >= 0)
+		close(scene->fd);
+	if (scene->mlx)
+	{
+		if (scene->img)
+			mlx_delete_image(scene->mlx, scene->img);
+		mlx_terminate(scene->mlx);
+		scene->img = NULL;
+		scene->mlx = NULL;
+	}
 	while (scene->objects)
 	{
 		obj_tmp = scene->objects->next;
@@ -14,12 +24,7 @@ void	ft_free_scene(t_scene *scene)
 		scene->objects = obj_tmp;
 	}
 	scene->objects = NULL;
-	if (scene->fd >= 0)
-		close(scene->fd);
-	if (scene->img && scene->mlx)
-		mlx_delete_image(scene->mlx, scene->img);
-	if (scene->mlx)
-		mlx_terminate(scene->mlx);
+	printf("scene freed\n");
 	free(scene);
 }
 
