@@ -21,4 +21,9 @@ typedef struct s_render_data
 void	render_scene(t_scene *scene);
 bool	mlx_window(t_scene *scene);
 
+// keyboard.c
+void	close_window(void *param);
+void	key_hook(mlx_key_data_t keydata, void *param);
+
 #endif
+
