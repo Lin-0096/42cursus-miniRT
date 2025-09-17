@@ -9,6 +9,9 @@ typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
 typedef struct s_a_light t_a_light;
 typedef struct s_light t_light;
+typedef struct s_plane t_plane;
+typedef struct s_color t_color;
+
 
 //struct
 //lin modify type, 8 bits for each color instead of using 32 bits(int) for each color
@@ -85,5 +88,7 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec);
 t_color	apply_ambient(t_color obj_color, t_a_light amb);
 t_color	apply_diffuse(t_light light, t_hit_record rec);
 t_color	final_color(t_color obj_color, t_a_light amb, t_light light, t_hit_record rec);
+bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec);
+
 
 #endif
