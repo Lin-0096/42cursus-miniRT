@@ -15,10 +15,10 @@ void	render_scene(t_scene *scene)
 
 	init_viewport(&scene->cam, &data.view);
 	y = 0;
-	while (y < HEIGHT)
+	while (y < scene->height)
 	{
 		x = 0;
-		while (x < WIDTH)
+		while (x < scene->width)
 		{
 			data.ray = generate_primary_ray(x, y, &data.view);
 			if (hit_objects(data.ray, scene->objects, &data.rec))
@@ -34,10 +34,26 @@ void	render_scene(t_scene *scene)
 	}
 }
 
+// mlx_image_to_window(mlx, img,
+//     (WINDOW_WIDTH - IMG_WIDTH) / 2,
+//     (WINDOW_HEIGHT - IMG_HEIGHT) / 2);
 // yuxin added this one, to call render scene repeatedly if the keyboard as pressed some valid buttoms
 static void render_scene_loop(void *param)
 {
     t_scene *scene = (t_scene *)param;
+	    
+	if (scene->need_resize)
+    {
+        mlx_delete_image(scene->mlx, scene->img);
+        scene->img = mlx_new_image(scene->mlx, scene->width, scene->height);
+        if (!scene->img)
+        {
+            ft_putstr_fd("mlx_new_image failed on resize\n", 2);
+            return;
+        }
+        mlx_image_to_window(scene->mlx, scene->img, 0, 0);
+		scene->need_resize = false;
+    }
 	if (scene->need_loop)
 	{
 		render_scene(scene);
@@ -45,26 +61,22 @@ static void render_scene_loop(void *param)
 	}
 }
 
-
-void resize_hook(int32_t width, int32_t height, void *param)
+void	handle_screen_resize(int32_t width, int32_t height, void *param)
 {
-    t_scene *scene = (t_scene *)param;
+	t_scene	*scene;
 
-    printf("new size: %d x %d\n", width, height);
-
-    scene->width = width;
+	scene = (t_scene *)param;
+	scene->width = width;
     scene->height = height;
-
-    mlx_resize_image(scene->img, width, height);
-
     scene->need_loop = 1;
+	scene->need_resize = 1;
 }
 
 
 //mlx_init: 4th: full scree> true or false
 bool	mlx_window(t_scene *scene)
 {
-	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT_test", false);
+	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT_test", true);
 	if (!scene->mlx)
     {
         ft_putstr_fd("mlx_init failed\n", 1);
@@ -77,8 +89,8 @@ bool	mlx_window(t_scene *scene)
         return (false);
     }
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
-	mlx_resize_hook(scene->mlx, resize_hook, scene); //resising
     mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
+	mlx_resize_hook(scene->mlx, handle_screen_resize, scene);
 	mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
     
 	scene->need_loop = true;
