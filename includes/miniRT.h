@@ -1,8 +1,9 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#define WIDTH 2800
-#define HEIGHT 2100
+#define WIDTH 800
+#define HEIGHT 600
+#define EPSILON 1e-4
 
 typedef struct s_vec3
 {

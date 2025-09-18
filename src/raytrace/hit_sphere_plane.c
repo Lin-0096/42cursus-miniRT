@@ -45,9 +45,9 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 		return (false);
 	t1 = (-hit.b - sqrt(hit.discriminant)) / (2.0f * hit.a);
 	t2 = (-hit.b + sqrt(hit.discriminant)) / (2.0f * hit.a);
-	if (t1 > 0)
+	if (t1 > EPSILON) //?
 		hit.t = t1;
-	else if (t2 > 0)
+	else if (t2 > EPSILON)
 		hit.t = t2;
 	else
 		return (false);

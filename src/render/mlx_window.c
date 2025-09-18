@@ -23,7 +23,7 @@ void	render_scene(t_scene *scene)
 			data.ray = generate_primary_ray(x, y, &data.view);
 			if (hit_objects(data.ray, scene->objects, &data.rec))
 			{
-				data.c = final_color(data.rec.rgb, scene->ambient_light, scene->light, data.rec);
+				data.c = final_color(data.rec.rgb, scene, data.rec);
 				mlx_put_pixel(scene->img, x, y, (data.c.r << 24 | data.c.g << 16 | data.c.b << 8 | 255));
 			}
 			else
@@ -66,7 +66,7 @@ bool	mlx_window(t_scene *scene)
 	render_scene(scene);
     mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
 	mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
-    
+
 	//render_scene(scene);yuxin chcnange it to loop
 	//scene->need_loop = true;
 	mlx_loop_hook(scene->mlx, render_scene_loop, scene);
