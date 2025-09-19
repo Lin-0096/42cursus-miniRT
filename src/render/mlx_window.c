@@ -7,7 +7,7 @@
 // I write this prototype here just as a starting point
 // the color of each pixel will be calulated by lin
 //0xAAFF1111, Transparency + rgb
-void	render_scene(t_scene *scene)
+static void	render_scene(t_scene *scene)
 {
 	int				x;
 	int				y;
@@ -34,10 +34,8 @@ void	render_scene(t_scene *scene)
 	}
 }
 
-// mlx_image_to_window(mlx, img,
-//     (WINDOW_WIDTH - IMG_WIDTH) / 2,
-//     (WINDOW_HEIGHT - IMG_HEIGHT) / 2);
-// yuxin added this one, to call render scene repeatedly if the keyboard as pressed some valid buttoms
+// yuxin added this one, 
+// to call render_scene repeatedly if the keyboard as pressed some valid buttoms
 static void render_scene_loop(void *param)
 {
     t_scene *scene = (t_scene *)param;
@@ -49,8 +47,9 @@ static void render_scene_loop(void *param)
 	}
 }
 
-
-void	handle_screen_resize(int32_t width, int32_t height, void *param)
+//handling resizing
+// incase of resizing, update the scene width and height can recall render scene
+static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 {
 	t_scene	*scene;
 
@@ -68,7 +67,6 @@ void	handle_screen_resize(int32_t width, int32_t height, void *param)
 	render_scene(scene);
 }
 
-
 //mlx_init: 4th: full scree> true or false
 bool	mlx_window(t_scene *scene)
 {
@@ -85,13 +83,13 @@ bool	mlx_window(t_scene *scene)
         return (false);
     }
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
+
     mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
-	mlx_resize_hook(scene->mlx, handle_screen_resize, scene);
+	mlx_resize_hook(scene->mlx, handle_screen_resize, scene); //resizeing by mouse
 	mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
     
-	scene->need_loop = true;
-	mlx_loop_hook(scene->mlx, render_scene_loop, scene); //render_scene(scene);yuxin chcnange it to loop
-
+	mlx_loop_hook(scene->mlx, render_scene_loop, scene);
 	mlx_loop(scene->mlx);
+
 	return (true);
 }

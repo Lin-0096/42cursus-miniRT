@@ -18,13 +18,12 @@ typedef struct s_render_data
 #include "parsing.h"
 
 //mlx_window.c
-void	render_scene(t_scene *scene);
 bool	mlx_window(t_scene *scene);
 
 // keyboard.c
+// close window by x and 3 types of keyboard controk
 void	close_window(void *param);
 void	key_hook(mlx_key_data_t keydata, void *param);
-
 
 //move_and_rotate.c		4/5
 void change_move(t_scene *scene, t_vec3 move);
