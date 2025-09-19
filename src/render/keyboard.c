@@ -32,9 +32,9 @@ static void move_keys(mlx_key_data_t keydata, t_scene *scene)
   }
 }
 
-static void scale_keys(mlx_key_data_t keydata, t_scene *scene)
+static void			scale_keys(mlx_key_data_t keydata, t_scene *scene)
 {
-  float		scale;
+float			scale;
 
 	scale = 0;
   if (keydata.key == MLX_KEY_UP)
@@ -72,7 +72,7 @@ void    key_hook(mlx_key_data_t keydata, void *param)
 	scene = (t_scene *)param;
 	if (keydata.action != MLX_PRESS)
 	{
-		return ;    
+		return ;
 	}
   //close window
 	if (keydata.key == MLX_KEY_ESCAPE)

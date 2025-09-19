@@ -2,27 +2,20 @@
 #include "parsing.h"
 #include    "render.h"
 
-// //test version for compiling
-
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_scene	*scene;
 
-    //parsing
-    scene = parsing(ac, av);
+	scene = parsing(ac, av); //parsing
 	if (!scene)
 		return(-1); //erro msg sent in parsing
-
-	//remove later
 	//ft_print_scene(scene); //testing. remove later
-
-	// // mlx
-	if (!mlx_window(scene))
+	if (!mlx_window(scene)) // mlx
 	{
 		ft_putstr_fd("mlx initiation failed\n", 1);
 		return (-1);
 	}
-    return (0);
+	return (0);
 }
 
 //==========================lin test===========================

@@ -2,10 +2,6 @@
 #include	"render.h"
 #include	"parsing.h"
 
-//lin needs to uses this ??
-// this is probably where our work overlapping each other
-// I write this prototype here just as a starting point
-// the color of each pixel will be calulated by lin
 //0xAAFF1111, Transparency + rgb
 static void	render_scene(t_scene *scene)
 {
@@ -36,10 +32,11 @@ static void	render_scene(t_scene *scene)
 
 // yuxin added this one, 
 // to call render_scene repeatedly if the keyboard as pressed some valid buttoms
-static void render_scene_loop(void *param)
+static void	render_scene_loop(void *param)
 {
-    t_scene *scene = (t_scene *)param;
+	t_scene	*scene;
 
+	scene = (t_scene *)param;
 	if (scene->need_loop)
 	{
 		render_scene(scene);
@@ -54,16 +51,16 @@ static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 	t_scene	*scene;
 
 	scene = (t_scene *)param;
-    mlx_delete_image(scene->mlx, scene->img);
-    scene->img = mlx_new_image(scene->mlx, width, height);
-    if (!scene->img)
-    {
-        ft_putstr_fd("mlx_new_image failed on resize\n", 2);
-        return;
-    }
-    mlx_image_to_window(scene->mlx, scene->img, 0, 0);
+	mlx_delete_image(scene->mlx, scene->img);
+	scene->img = mlx_new_image(scene->mlx, width, height);
+	if (!scene->img)
+	{
+		ft_putstr_fd("mlx_new_image failed on resize\n", 2);
+		return;
+	}
+	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
 	scene->width = width;
-    scene->height = height;
+	scene->height = height;
 	render_scene(scene);
 }
 
@@ -72,24 +69,21 @@ bool	mlx_window(t_scene *scene)
 {
 	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT_test", true);
 	if (!scene->mlx)
-    {
-        ft_putstr_fd("mlx_init failed\n", 1);
-        return (false);
-    }
-	scene->img = mlx_new_image(scene->mlx, WIDTH, HEIGHT);
-    if (!scene->img)
 	{
-        ft_putstr_fd("mlx_new image failed\n", 1);
-        return (false);
-    }
+		ft_putstr_fd("mlx_init failed\n", 1);
+		return (false);
+	}
+	scene->img = mlx_new_image(scene->mlx, WIDTH, HEIGHT);
+	if (!scene->img)
+	{
+		ft_putstr_fd("mlx_new image failed\n", 1);
+		return (false);
+	}
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
-
-    mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
+	mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
 	mlx_resize_hook(scene->mlx, handle_screen_resize, scene); //resizeing by mouse
 	mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
-    
 	mlx_loop_hook(scene->mlx, render_scene_loop, scene);
 	mlx_loop(scene->mlx);
-
 	return (true);
 }
