@@ -96,7 +96,6 @@ typedef struct s_camera_view
 }	t_camera_view;
 
 bool	hit_objects(t_ray ray, t_object *obj, t_hit_record *rec);
-//bool	hit_objects(t_ray ray, t_object *obj, t_hit_record *rec, t_object *ignore);
 
 t_vec3	vec3(float x, float y, float z);
 void	init_camera_frame(t_camera	*cam, t_vec3 *right, t_vec3 *up);
@@ -112,11 +111,12 @@ bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec);
 int		clamp(int value, int min, int max);
 t_color apply_ambient(t_color obj_color, t_a_light amb);
 t_color	apply_diffuse(t_color obj_color, t_light light, t_hit_record rec);
+t_color	get_color_from_object(t_object *obj);
 
 bool	hit_cylinder(t_ray ray, t_cylinder *cy, t_hit_record *rec);
 
 //handle_light
-t_color	final_color(t_color obj_color, t_scene *scene, t_hit_record rec);
+t_color	final_color(t_scene *scene, t_hit_record rec);
 
 //handle_shadow
 bool	is_in_shadow(t_hit_record rec, t_light light, t_object *obj);

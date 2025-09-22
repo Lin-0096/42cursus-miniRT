@@ -49,3 +49,16 @@ t_color	apply_diffuse(t_color obj_color, t_light light, t_hit_record rec)
 	color.b = clamp((int)obj_color.b * (light.rgb.b / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
 	return (color);
 }
+
+t_color	get_color_from_object(t_object *obj)
+{
+	if (obj->type == OBJ_SP)
+		return (((t_sphere *)obj->data)->rgb);
+	else if (obj->type == OBJ_PL)
+		return (((t_plane *)obj->data)->rgb);
+	else if (obj->type == OBJ_CY)
+		return (((t_cylinder *)obj->data)->rgb);
+	return ((t_color){0, 0, 0}); // fallback to black
+}
+
+
