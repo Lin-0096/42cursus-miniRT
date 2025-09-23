@@ -63,12 +63,22 @@ static t_color	apply_specular(t_light light, t_hit_record rec, t_vec3 pos)
 // to be FIX on tuesday, it should be u, v instead of directly x and z
 static t_color	apply_checkerboard(t_hit_record rec, t_color original_color)
 {
-	int	x;
-	int	z;
+	t_vec3	u_axis;
+	t_vec3	v_axis;
+	t_vec3	rel;
+	int		u;
+	int		v;
 
-	x = floorf(rec.point.x);
-	z = floorf(rec.point.z);
-	if (((abs(x + z)) % 2) != 0)
+	if (rec.normal.y > 0.99 || rec.normal.y < -0.99)
+		u_axis = vec_cross((t_vec3){1, 0, 0}, rec.normal);
+	else
+		u_axis = vec_cross((t_vec3){0, 1, 0}, rec.normal);
+	u_axis = vec_normalize(u_axis);
+	v_axis = vec_normalize(vec_cross(rec.normal, u_axis));
+	rel = vec_sub(rec.point, ((t_plane *)rec.obj->data)->p_in_pl);
+	u = (int)floorf(vec_dot(rel, u_axis));
+	v = (int)floorf(vec_dot(rel, v_axis));
+	if ((u + v) % 2 != 0)
 	{
 		original_color.r = 255 - original_color.r;
 		original_color.g = 255 - original_color.g;
