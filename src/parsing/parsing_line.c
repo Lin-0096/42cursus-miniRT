@@ -73,7 +73,7 @@ static bool	validating_line_id_and_nbr(char **tokens)
 		return (true);
 	if (ft_strcmp(tokens[0], "C") == 0 && nbr == 4)
 		return (true);
-	if (ft_strcmp(tokens[0], "L") == 0 && nbr == 3)
+	if (ft_strcmp(tokens[0], "L") == 0 && nbr == 4)
 		return (true);
 	if (ft_strcmp(tokens[0], "sp") == 0 && nbr == 4)
 		return (true);
@@ -97,7 +97,7 @@ bool	validating_parsing_line(char *line, t_scene *scene)
 		return (true);
 	if (scene->line_error == true)
 		return (false);
-	tokens = ft_split(line, ' ');
+	tokens = ft_split(line, '\t');
 	if (!validating_line_id_and_nbr(tokens))
 	{
 		ft_free_arr(tokens);
