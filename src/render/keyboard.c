@@ -75,9 +75,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 
 	scene = (t_scene *)param;
 	if (keydata.action != MLX_PRESS)
-	{
 		return ;
-	}
 	if (keydata.key == MLX_KEY_ESCAPE)
 		close_window(scene);
 	move_keys(keydata, scene);

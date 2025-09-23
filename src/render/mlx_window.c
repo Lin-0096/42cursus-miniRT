@@ -98,6 +98,8 @@ bool	mlx_window(t_scene *scene)
 	mlx_close_hook(scene->mlx, close_window, scene);
 	mlx_resize_hook(scene->mlx, handle_screen_resize, scene);
 	mlx_loop_hook(scene->mlx, render_scene_loop, scene);
-	mlx_loop(scene->mlx);
+	while (scene->running)
+		mlx_loop(scene->mlx);
+	ft_free_scene(scene);
 	return (true);
 }
