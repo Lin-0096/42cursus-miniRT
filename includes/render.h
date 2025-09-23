@@ -1,7 +1,7 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-typedef struct s_scene t_scene;
+typedef struct s_scene	t_scene;
 
 typedef struct s_render_data
 {
@@ -13,9 +13,9 @@ typedef struct s_render_data
 
 //self_defined header
 # include "../libft/libft.h"
-#include "MLX42/MLX42.h"
-#include "miniRT.h"
-#include "parsing.h"
+# include "MLX42/MLX42.h"
+# include "miniRT.h"
+# include "parsing.h"
 
 //mlx_window.c			4/5
 bool	mlx_window(t_scene *scene);
@@ -28,4 +28,3 @@ void	change_scale(t_scene *scene, float scale);
 void	change_rotation(t_scene *scene, t_vec3 y_axis, float angle);
 
 #endif
-

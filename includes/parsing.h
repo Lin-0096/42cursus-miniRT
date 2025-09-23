@@ -2,7 +2,7 @@
 # define PARSING_H
 
 //headers
-#include "miniRT.h"
+# include "miniRT.h"
 # include "raytrace.h"
 
 // Ambient lightning: A 0.2 255,255,255
@@ -38,7 +38,7 @@ typedef struct s_object
 {
 	t_obj_type			type;
 	void				*data;
-	struct	s_object	*next;
+	struct s_object		*next;
 }	t_object;
 
 // ◦ Sphere: sp 0.0,0.0,20.6 12.6 10,0,255
@@ -111,12 +111,13 @@ void	ft_free_scene(t_scene *scene);
 bool	validate_parsing_tokens_a(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_c(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_l(char **tokens, t_scene *scene);
-//parsing_obj_1.c     4/5	sphere
-bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data);
+//parsing_obj_sp.c     3/5	sphere
 bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene);
 //parsing_obj_2.c     5/5	plane and cylinder
 bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene);
+//parsing_obj_sp.c     1/5	add objects to an linked list of objs
+bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data);
 //parsing_utils_1.c   4/5	str helpers
 float	ft_atoi_float(char *str);
 int		count_token_nbr(char **tokens);

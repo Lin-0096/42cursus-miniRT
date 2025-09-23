@@ -5,13 +5,13 @@
 # include "parsing.h"
 # include <math.h>
 
-typedef struct s_object t_object;
-typedef struct s_sphere t_sphere;
-typedef struct s_a_light t_a_light;
-typedef struct s_light t_light;
-typedef struct s_plane t_plane;
-typedef struct s_color t_color;
-typedef struct s_cylinder t_cylinder;
+typedef struct s_object		t_object;
+typedef struct s_sphere		t_sphere;
+typedef struct s_a_light	t_a_light;
+typedef struct s_light		t_light;
+typedef struct s_plane		t_plane;
+typedef struct s_color		t_color;
+typedef struct s_cylinder	t_cylinder;
 
 typedef struct s_color
 {
@@ -23,7 +23,7 @@ typedef struct s_color
 typedef struct s_ray
 {
 	t_vec3	origin;
-	t_vec3	direction;;
+	t_vec3	direction;
 }	t_ray;
 
 typedef struct s_hit_record
@@ -95,7 +95,7 @@ typedef struct s_camera_view
 	t_vec3	vertical;
 }	t_camera_view;
 
-bool	hit_objects(t_ray ray, t_object *obj, t_hit_record *rec);
+//cemera_ray.c
 t_vec3	vec3(float x, float y, float z);
 void	init_camera_frame(t_camera	*cam, t_vec3 *right, t_vec3 *up);
 void	init_viewport(t_scene *scene, t_camera_view *view);
@@ -103,14 +103,18 @@ t_ray	generate_primary_ray(int x, int y, t_camera_view *view, t_scene *scene);
 //hit_sphere_plane
 bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec);
 bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec);
+//hit_cylinder
+bool	hit_cylinder(t_ray ray, t_cylinder *cy, t_hit_record *rec);
+//hit_cylinder_utils
+bool	hit_bottom_cap(t_ray ray, t_cylinder *cy, t_hit_record *rec);
+bool	hit_top_cap(t_ray ray, t_cylinder *cy, t_hit_record *rec);
+//hit obejcts
+bool	hit_objects(t_ray ray, t_object *obj, t_hit_record *rec);
 //handle_light_utils
 int		clamp(int value, int min, int max);
 t_color	apply_ambient(t_color obj_color, t_a_light amb);
 t_color	apply_diffuse(t_color obj_color, t_light light, t_hit_record rec);
 t_color	get_color_from_object(t_object *obj);
-bool	hit_cylinder(t_ray ray, t_cylinder *cy, t_hit_record *rec);
-bool	hit_bottom_cap(t_ray ray, t_cylinder *cy, t_hit_record *rec);
-bool	hit_top_cap(t_ray ray, t_cylinder *cy, t_hit_record *rec);
 //handle_light
 t_color	final_color(t_scene *scene, t_hit_record rec);
 //handle_shadow
