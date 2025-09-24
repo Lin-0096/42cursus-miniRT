@@ -3,14 +3,13 @@
 
 # include "miniRT.h"
 # include "parsing.h"
-# include <math.h>
 
+typedef struct s_scene		t_scene;
 typedef struct s_object		t_object;
-typedef struct s_sphere		t_sphere;
 typedef struct s_a_light	t_a_light;
 typedef struct s_light		t_light;
+typedef struct s_sphere		t_sphere;
 typedef struct s_plane		t_plane;
-typedef struct s_color		t_color;
 typedef struct s_cylinder	t_cylinder;
 
 typedef struct s_color
@@ -67,15 +66,13 @@ typedef struct s_hit_cy_info
 // C -50.0,0,20 0,0,1 70
 // ∗ identifier: C
 // ∗ x,y,z coordinates of the view point: -50.0,0,20
-// ∗ 3d normalized orientation vector.
-// In range [-1,1] for each x,y,z axis:
-// 0.0,0.0,1.0
+// ∗ 3d normalized orientation vector. In range [-1,1]: 0.0,0.0,1.0
 // ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
 typedef struct s_camera
 {
 	t_vec3	v_point;
 	t_vec3	v_orien;
-	float	fov; //lin modify
+	float	fov;
 }	t_camera;
 
 //the width and height of the viewport

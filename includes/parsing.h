@@ -82,7 +82,7 @@ typedef struct s_cylinder
 	t_color		rgb;
 }	t_cylinder;
 
-// a ascene with everything inside
+// a scene with everything inside
 typedef struct s_scene
 {
 	int			fd;
@@ -123,8 +123,7 @@ float	ft_atoi_float(char *str);
 int		count_token_nbr(char **tokens);
 void	free_three_arr(char **vec_1, char **vec_2, char **colors);
 void	normalize_line(char *line);
-//parsing_utils_2.c   5/5
-//fill **str to t_vec and t_color, precheck a str is a valid float
+//parsing_utils_2.c   5/5	fill **str to t_vec and t_color
 bool	check_valid_float(char *str);
 bool	do_color(char **colors, t_color *rgb);
 bool	do_normalized_vectoy(char **vec, t_vec3 *vec_nor);

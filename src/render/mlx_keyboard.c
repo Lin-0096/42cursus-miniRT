@@ -1,5 +1,4 @@
 #include "miniRT.h"
-#include "render.h"
 #include "parsing.h"
 
 // Clicking on the red cross on the window’s frame

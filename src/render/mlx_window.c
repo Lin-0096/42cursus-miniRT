@@ -1,5 +1,4 @@
 #include "miniRT.h"
-#include "render.h"
 #include "parsing.h"
 
 // camera updated inside it, be called repeately
