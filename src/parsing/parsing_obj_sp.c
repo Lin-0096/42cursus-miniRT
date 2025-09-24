@@ -2,7 +2,7 @@
 #include "parsing.h"
 
 //helper functions for the validate_parsing_tokens_sp below
-static bool	fill_sp_bio_data(char **tokens, t_sphere *new_sp)
+static bool	fill_sp_bi_info(char **tokens, t_sphere *new_sp)
 {
 	char	**vec_1;
 	char	**colors;
@@ -12,20 +12,19 @@ static bool	fill_sp_bio_data(char **tokens, t_sphere *new_sp)
 	if (!do_color(colors, &(new_sp->rgb))
 		|| !do_xyz_vectoy(vec_1, &new_sp->sp_center))
 	{
-		free_three_arr(vec_1, NULL, colors);
+		free_three_arr(vec_1, colors, NULL);
 		return (false);
 	}
-	free_three_arr(vec_1, NULL, colors);
+	free_three_arr(vec_1, colors, NULL);
 	return (true);
 }
 
-static bool	fill_cy_float(char **tokens, t_sphere *new_sp)
+static bool	fill_sp_float(char **tokens, t_sphere *new_sp)
 {
-	if (check_valid_float(tokens[2]))
-		new_sp->radius = ft_atoi_float(tokens[2]) / 2;
-	else
+	if (!check_valid_float(tokens[2]))
 		return (false);
-	if (new_sp->radius < 0 || new_sp->radius > 1000)
+	new_sp->radius = ft_atoi_float(tokens[2]) / 2;
+	if (new_sp->radius <= 0 || new_sp->radius > 1000)
 		return (false);
 	return (true);
 }
@@ -41,16 +40,15 @@ bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 {
 	t_sphere	*new_sp;
 
-	new_sp = malloc(sizeof(t_sphere));
+	new_sp = ft_calloc(1, sizeof(t_sphere));
 	if (!new_sp)
 		return (false);
-	ft_bzero(new_sp, sizeof(t_sphere));
-	if (!fill_cy_float(tokens, new_sp))
+	if (!fill_sp_float(tokens, new_sp))
 	{
 		free (new_sp);
 		return (false);
 	}
-	if (!fill_sp_bio_data(tokens, new_sp))
+	if (!fill_sp_bi_info(tokens, new_sp))
 	{
 		free (new_sp);
 		return (false);

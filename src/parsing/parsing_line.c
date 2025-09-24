@@ -1,45 +1,6 @@
 #include "miniRT.h"
 #include "parsing.h"
 
-static void	delete_mlx(t_scene *scene)
-{
-	if (scene->mlx)
-	{
-		if (scene->img)
-			mlx_delete_image(scene->mlx, scene->img);
-		scene->img = NULL;
-		mlx_terminate(scene->mlx);
-		scene->mlx = NULL;
-	}
-	return ;
-}
-
-void	ft_free_scene(t_scene *scene)
-{
-	t_object	*obj_tmp;
-
-	if (!scene)
-		return ;
-	if (scene->fd >= 0)
-		close(scene->fd);
-	scene->fd = -1;
-	delete_mlx(scene);
-	while (scene->objects)
-	{
-		obj_tmp = scene->objects->next;
-		if (scene->objects->data)
-		{
-			free(scene->objects->data);
-			scene->objects->data = NULL;
-		}
-		free(scene->objects);
-		scene->objects = obj_tmp;
-	}
-	scene->objects = NULL;
-	free(scene);
-	scene = NULL;
-}
-
 //parsing one line
 static bool	validate_tokens_content(char **tokens, t_scene *scene)
 {
@@ -84,6 +45,29 @@ static bool	validating_line_id_and_nbr(char **tokens)
 	return (false);
 }
 
+bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data)
+{
+	t_object	*obj;
+	t_object	*tmp;
+
+	obj = malloc(sizeof(t_object));
+	if (!obj)
+		return (false);
+	obj->type = type;
+	obj->data = data;
+	obj->next = NULL;
+	if (!scene->objects)
+		scene->objects = obj;
+	else
+	{
+		tmp = scene->objects;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = obj;
+	}
+	return (true);
+}
+
 // sub
 // Each type of element can be separated by one or more line break(s).
 // ◦ Elements which are defined by a capital letter 
@@ -92,12 +76,15 @@ static bool	validating_line_id_and_nbr(char **tokens)
 bool	validating_parsing_line(char *line, t_scene *scene)
 {
 	char	**tokens;
+	int		i;
 
-	if (!line[0])
-		return (true);
+	i = 0;
 	if (scene->line_error == true)
 		return (false);
-	normalize_line(line);
+	while (line[i] && ft_isspace(line[i]))
+		i++;
+	if (!line[i])
+		return (true);
 	tokens = ft_split(line, ' ');
 	if (!validating_line_id_and_nbr(tokens))
 	{

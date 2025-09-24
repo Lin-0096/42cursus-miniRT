@@ -11,6 +11,8 @@ static bool	check_valid_color(char *color)
 	{
 		if (!ft_isdigit(color[i]))
 			return (false);
+		if (i > 3)
+			return (false);
 		i++;
 	}
 	if (ft_atoi(color) > 255)
@@ -55,7 +57,7 @@ bool	check_valid_float(char *str)
 		i++;
 	if (!ft_isdigit(str[i]))
 		return (false);
-	while (str[i])
+	while (ft_isdigit(str[i]))
 		i++;
 	if (str[i] == '.')
 	{

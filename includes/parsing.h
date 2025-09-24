@@ -102,11 +102,12 @@ typedef struct s_scene
 	bool		line_error;
 }	t_scene;
 
-//parsing_file.c          5/5
+//parsing_file.c          4/5
 t_scene	*parsing(int ac, char **av);
+void	ft_free_scene(t_scene *scene);
 //parsing_line.c	5/5		check each line, return true or false
 bool	validating_parsing_line(char *line, t_scene *scene);
-void	ft_free_scene(t_scene *scene);
+bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data);
 // parsing_env.c     3/5	a_light, camera, light:
 bool	validate_parsing_tokens_a(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_c(char **tokens, t_scene *scene);
@@ -116,9 +117,7 @@ bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene);
 //parsing_obj_2.c     5/5	plane and cylinder
 bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene);
-//parsing_obj_sp.c     1/5	add objects to an linked list of objs
-bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data);
-//parsing_utils_1.c   4/5	str helpers
+//parsing_utils_1.c   3/5	str helpers
 float	ft_atoi_float(char *str);
 int		count_token_nbr(char **tokens);
 void	free_three_arr(char **vec_1, char **vec_2, char **colors);

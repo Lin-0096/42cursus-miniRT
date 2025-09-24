@@ -73,7 +73,7 @@ void	normalize_line(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '\t')
+		if (ft_isspace(line[i]))
 			line[i] = ' ';
 		i++;
 	}
