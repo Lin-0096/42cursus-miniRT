@@ -121,5 +121,8 @@ bool	do_normalized_vectoy(char **vec, t_vec3 *vec_nor) //should modify?
 	vec_nor->x = ft_atoi_float(vec[0]);
 	vec_nor->y = ft_atoi_float(vec[1]);
 	vec_nor->z = ft_atoi_float(vec[2]);
+	if (fabs(vec_len(*vec_nor)) < EPSILON)
+		return (false);
+	*vec_nor = vec_normalize(*vec_nor);
 	return (true);
 }
