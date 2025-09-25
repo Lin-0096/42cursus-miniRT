@@ -113,7 +113,8 @@ t_scene	*parsing(int ac, char **av)
 			scene->line_error = true;
 		free (line);
 	}
-	if (scene->line_error == true)
+	if (scene->line_error == true || !scene->al_existence
+		|| !scene->c_existence || !scene->l_existence)
 	{
 		ft_putstr_fd("Error: error occured during line checking\n", 2);
 		ft_free_scene(scene);
