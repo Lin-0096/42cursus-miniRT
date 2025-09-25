@@ -32,7 +32,6 @@ static void	change_move_objs(t_scene *scene, t_vec3 move)
 //from the subject
 //  Your program must be able to apply translation 
 // and rotation transformation to objects, lights and cameras 
-// (except for spheres and lights that cannot be rotated
 void	change_move(t_scene *scene, t_vec3 move)
 {
 	if (scene->cam_move)
