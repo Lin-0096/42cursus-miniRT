@@ -15,6 +15,7 @@ static void	move_keys(mlx_key_data_t keydata, t_scene *scene)
 	t_vec3	move;
 
 	move = (t_vec3){0, 0, 0};
+	//old
 	if (keydata.key == MLX_KEY_W)
 		move = (t_vec3){0, MOVE_UNIT, 0};
 	if (keydata.key == MLX_KEY_S)
@@ -23,6 +24,15 @@ static void	move_keys(mlx_key_data_t keydata, t_scene *scene)
 		move = (t_vec3){-MOVE_UNIT, 0, 0};
 	if (keydata.key == MLX_KEY_D)
 		move = (t_vec3){MOVE_UNIT, 0, 0};
+	//new
+	// if (keydata.key == MLX_KEY_W)
+	// 	move = vec_scale(scene->view.forward, MOVE_UNIT);
+	// if (keydata.key == MLX_KEY_S)
+	// 	move = vec_scale(scene->view.forward, -MOVE_UNIT);
+	// if (keydata.key == MLX_KEY_A)
+	// 	move = vec_scale(scene->view.right, -MOVE_UNIT);
+	// if (keydata.key == MLX_KEY_D)
+	// 	move = vec_scale(scene->view.right, MOVE_UNIT);
 	if (vec_len(move))
 	{
 		scene->need_loop = 1;
