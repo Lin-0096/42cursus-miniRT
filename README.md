@@ -33,7 +33,7 @@
 git clone https://github.com/Lin-0096/42cursus-miniRT.git
 cd 42cursus-miniRT
 make
-./miniRT scenes/scene1.rt
+./miniRT scenes/(any file here or create your own scene)
 ```
 
 ---
