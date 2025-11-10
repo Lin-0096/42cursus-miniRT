@@ -4,11 +4,11 @@
   <h1>miniRT</h1>
 </div>
 
-`miniRT` is a 42 school project that requires you to build a **basic ray tracer in C**, capable of parsing a scene file and generating a realistic image by simulating light rays and their interaction with objects.
+`miniRT` requires me to build a **basic ray tracer in C**, capable of parsing a scene file and generating a realistic image by simulating light rays and their interaction with objects.
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 - Parses `.rt` scene description files containing camera, lights, and primitive objects (sphere, plane, cylinder, etc.)
 - Implements core ray‑tracing pipeline: ray generation, object intersection, shading (diffuse, specular), shadows, reflections and refractions (bonus)
@@ -17,7 +17,7 @@
 
 ---
 
-## 🧠 Core Technical Skills
+## Core Technical Skills
 
 - 3D geometry and vector math for ray‑object intersection
 - Parsing textual scene descriptions and building scene graphs
@@ -27,28 +27,7 @@
 
 ---
 
-## 📁 Project Structure
-
-```
-miniRT/
-├── include/
-│   └── miniRT.h               # Structs & prototypes for scene, rays, objects
-├── src/
-│   ├── parser.c                # Scene file parsing
-│   ├── intersection.c          # Ray‑object intersections
-│   ├── shading.c               # Light, color and material logic
-│   ├── render.c                # Ray generation & image creation
-│   ├── utils.c                 # Math helpers and vector operations
-│   └── main.c                  # Program entry point
-├── scenes/                     # Sample .rt files and textures
-├── output/                     # Rendered image results
-├── Makefile                    # Build rules
-└── README.md                   # This documentation
-```
-
----
-
-## 🚀 How to Run
+## How to Run
 
 ```bash
 git clone https://github.com/Lin-0096/42cursus-miniRT.git
@@ -59,9 +38,8 @@ make
 
 ---
 
-## 🎯 Learning Outcomes
+## Learning Outcomes
 
-- Developed confidence in implementing **ray tracing** from scratch in C
 - Practiced **vector math**, **geometry**, and **graphics algorithms**
 - Gained experience in **parsing**, **image generation**, and **software architecture** for rendering
 - Strengthened ability to write clean code, handle edge cases, and manage memory in more complex C projects
